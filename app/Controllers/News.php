@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\NewsModel;
+
 class News extends BaseController
 {
 	public function index()
@@ -24,7 +26,7 @@ class News extends BaseController
 	}
 
 	public function hotNews(){
-		$data['title']='Hot News';
+		/*$data['title']='Hot News';
 		$data['news'][0]= [
 						'titulo'=>'Guerra en Ucrania',
 						'autor'=>'Estrella Parrilla Sanz',
@@ -42,7 +44,11 @@ class News extends BaseController
 			'image'=>'guerra-ucrania.jpg',
 			'categoria'=>'actualidad',
 			'resumen'=>'La guerra dura ya más de un mes'];
+*/
 
+		$model = model(NewsModel::class);
+		$data['news'] = $model->getNews();
+var_dump($data);die;
 
 		echo view('templates/header', $data);
 		echo view('pages/news', $data);

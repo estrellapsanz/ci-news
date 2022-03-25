@@ -37,11 +37,13 @@
 # DATABASE
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
-# database.default.database = ci4
-# database.default.username = root
-# database.default.password = root
-# database.default.DBDriver = MySQLi
+database.default.hostname = localhost
+database.default.dsn='mysql:host=localhost;port=3307;dbname=news';
+database.default.database = news
+database.default.username = drupal
+database.default.password = drupal
+database.default.DBDriver = mysql
+database.default.port=3307
 # database.default.DBPrefix =
 
 # database.tests.hostname = localhost
