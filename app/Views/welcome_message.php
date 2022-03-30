@@ -208,7 +208,7 @@
 				<button onclick="toggleMenu();">&#9776;</button>
 			</li>
 			<li class="menu-item hidden"><a href="#">Home</a></li>
-			<li class="menu-item hidden"><a href="news" target="_blank">News</a>
+			<li class="menu-item hidden"><a href="news">News</a>
 			</li>
 			<li class="menu-item hidden"><a href="https://forum.codeigniter.com/" target="_blank">Community</a></li>
 			<li class="menu-item hidden"><a
@@ -218,11 +218,8 @@
 	</div>
 
 	<div class="heroe">
-
         <h1>News Today!</h1>
-
 		<h2>(Powered by CodeIgniter <?= CodeIgniter\CodeIgniter::CI_VERSION ?> )</h2>
-
 	</div>
 
 </header>
@@ -230,7 +227,6 @@
 <!-- CONTENT -->
 
 <section>
-
 	<h1>Noticias de actualidad</h1>
 	<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 	<p>If you would like to edit this page you will find it located at:</p>

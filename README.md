@@ -66,3 +66,7 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 
 https://www.elconfidencial.com/mundo/2022-03-25/ultima-hora-directo-guerra-rusia-ucrania-corredor-crimea_3397669/
+https://www.eleconomista.es/empresas-finanzas/noticias/11671424/03/22/ArcelorMittal-detiene-parte-de-su-produccion-por-el-impacto-de-la-huelga-de-transportes.html
+https://www.eleconomista.es/economia/noticias/11686844/03/22/La-inflacion-espanola-subira-a-tasas-del-10-ya-en-el-mes-de-marzo.html
+https://elpais.com/internacional/2022-03-26/los-que-se-quedan-en-kiev-un-repartidor-de-glovo-y-otros-vecinos-de-una-capital-casi-desierta.html
+https://elpais.com/espana/2022-03-26/la-amenaza-del-banquillo-persigue-a-juan-carlos-i.html

@@ -21,7 +21,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -33,7 +33,11 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/news', 'News::hotNews');
-$routes->get('/news', 'News::hotNews/$1');
+$routes->get('/news/(:num)', 'News::hotNews/$1');
+$routes->get('/admin', 'Admin::index');
+$routes->match(['get', 'post'], 'admin/new', 'Admin::new');
+$routes->get('/admin/edit/:num', 'Admin::editNew/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

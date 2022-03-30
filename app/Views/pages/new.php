@@ -5,7 +5,7 @@
 		<?= session()->getFlashdata('error') ?>
 		<?= service('validation')->listErrors() ?>
 
-        <form action="<?= $this->url('admin/create') ?>" method="post" enctype="multipart / form - data">
+        <form action='<?= base_url() ?>/admin/new' method="POST" enctype="multipart/form-data">
 
             <div>
                 <label for="titulo">Título</label>
@@ -34,7 +34,8 @@
             </div>
             <div>
                 <br>
-                <button type="submit">Enviar</button>
+                <button type="cancel" class="btn btn-secondary">Cancelar</button>
+                <button type="submit" class="btn btn-success">Enviar</button>
             </div>
         </form>
     </div>

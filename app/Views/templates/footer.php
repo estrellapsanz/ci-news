@@ -1,4 +1,4 @@
-<footer>
+ <footer <?php if ($admin) echo 'style=background-color:darkgrey important!';?>>
     <div class="environment">
 
         <p>Page rendered in {elapsed_time} seconds</p>

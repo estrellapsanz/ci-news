@@ -18,6 +18,7 @@ class News extends BaseController
 			throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
 		}
 
+		$data['admin']=false;
 		$data['title'] = ucfirst($page); // Capitalize the first letter
 
 		echo view('templates/header', $data);
@@ -25,30 +26,27 @@ class News extends BaseController
 		echo view('templates/footer.php', $data);
 	}
 
-	public function hotNews(){
-		/*$data['title']='Hot News';
-		$data['news'][0]= [
-						'titulo'=>'Guerra en Ucrania',
-						'autor'=>'Estrella Parrilla Sanz',
-						'fecha'=>date("F j, Y, g:i a"),
-						'contenido'=>'Lorem ipsum ',
-						'image'=>'guerra-ucrania.jpg',
-			            'categoria'=>'actualidad',
-						'resumen'=>'La guerra dura ya más de un mes'];
+	public function hotNews($newId=false){
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
 
-		$data['news'][1]= [
-			'titulo'=>'Guerra en Ucrania',
-			'autor'=>'Estrella Parrilla Sanz',
-			'fecha'=>date("F j, Y, g:i a"),
-			'contenido'=>'Lorem ipsum ',
-			'image'=>'guerra-ucrania.jpg',
-			'categoria'=>'actualidad',
-			'resumen'=>'La guerra dura ya más de un mes'];
-*/
-
+		$data['admin']=false;
+		$data['title']='Noticias de actualidad';
 		$model = model(NewsModel::class);
 		$data['news'] = $model->getNews();
-var_dump($data);die;
+
+
+		if (is_numeric($newId)){
+			$data['title']='Noticia';
+			$data['new'] = $model->getNews($newId);
+			echo view('templates/header', $data);
+			echo view('pages/news/'.$newId, $data);
+			//echo view('pages/news', $data); y no poner foreach en vista
+			echo view('templates/footer.php', $data);
+			return ;
+		}
+
 
 		echo view('templates/header', $data);
 		echo view('pages/news', $data);
