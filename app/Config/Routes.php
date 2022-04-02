@@ -35,7 +35,8 @@ $routes->get('/', 'Home::index');
 $routes->get('/news', 'News::hotNews');
 $routes->get('/news/(:num)', 'News::hotNews/$1');
 $routes->get('/admin', 'Admin::index');
-$routes->match(['get', 'post'], 'admin/new', 'Admin::new');
+$routes->get('admin/new', 'Admin::new');
+$routes->get('admin/saveNew', 'Admin::saveNew');
 $routes->get('/admin/edit/:num', 'Admin::editNew/$1');
 
 /*

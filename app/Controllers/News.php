@@ -13,7 +13,7 @@ class News extends BaseController
 
 		/* Loading user modal and session library */
 		$this->model = model(NewsModel::class);
-		//$this->session = \Config\Services::session();
+		$this->admin = false;
 	}
 
 	public function index()
@@ -23,9 +23,7 @@ class News extends BaseController
 
 	public function hotNews($newId = false)
 	{
-		$data['admin'] = false;
 		$data['title'] = 'Noticias de actualidad';
-
 
 		if (is_numeric($newId)) {
 
@@ -42,8 +40,8 @@ class News extends BaseController
 			$data['news'] = $this->model->getNews();
 
 
-		echo view('templates/header', $data);
+		echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
 		echo view('pages/news', $data);
-		echo view('templates/footer.php', $data);
+		echo view('templates/footer.php', ['data' => $data, 'admin' => $this->admin]);
 	}
 }

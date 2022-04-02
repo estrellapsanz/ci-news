@@ -1,19 +1,20 @@
- <footer <?php if ($admin) echo 'style=background-color:darkgrey important!';?>>
-    <div class="environment">
+ <footer <?php if ($admin) echo 'style=background-color:darkgrey important!'; ?>>
+     <div class="environment">
 
-        <p>Page rendered in {elapsed_time} seconds</p>
+         <p>Page rendered in {elapsed_time} seconds</p>
 
-        <p>Environment: <?= ENVIRONMENT ?></p>
+         <p>Environment: <?= ENVIRONMENT ?></p>
 
-    </div>
+     </div>
 
-    <div class="copyrights">
+     <div class="copyrights">
 
-        <p>&copy; <?= date('Y') ?> CodeIgniter Foundation. CodeIgniter is open source project released under the MIT
-            open source licence.</p>
+         <p>&copy; <?= date('Y') ?> CodeIgniter Foundation. CodeIgniter is open source project released under the MIT
+             open source licence.</p>
 
-    </div>
+     </div>
 
-</footer>
-</body>
-</html>
+ </footer>
+ </body>
+
+ </html>

@@ -2,10 +2,10 @@
     <div class="further">
         <h1><?= $title ?></h1>
 
-		<?= session()->getFlashdata('error') ?>
-		<?= service('validation')->listErrors() ?>
+        <?= session()->getFlashdata('error') ?>
+        <?= service('validation')->listErrors() ?>
 
-        <form action='<?= base_url() ?>/admin/new' method="POST" enctype="multipart/form-data">
+        <form action='/admin/saveNew' method="post" enctype="multipart/form-data">
 
             <div>
                 <label for="titulo">Título</label>

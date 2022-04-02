@@ -10,18 +10,17 @@ class Admin extends BaseController
 
 	function __construct()
 	{
-		/* Loading user modal and session library */
+
 		$this->model = model(NewsModel::class);
-		$this->session = \Config\Services::session();
+		$this->admin = true;
 	}
 
 
 	public function index()
 	{
-		$data['admin'] = true;
 		$data['title'] = 'Administración de noticias';
 		$data['news'] = $this->model->getNews();
-		echo view('templates/header', $data);
+		echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
 		echo view('pages/admin', $data);
 		echo view('templates/footer.php', $data);
 	}
@@ -29,8 +28,8 @@ class Admin extends BaseController
 	public function new()
 	{
 
-		$data['admin'] = true;
 		$data['title'] = 'Nueva Noticia';
+
 
 		/*if (1 || $this->request->getMethod() === 'post' && $this->validate([
 				'titulo' => 'required|min_length[3]|max_length[200]',
@@ -42,7 +41,7 @@ class Admin extends BaseController
 		*/
 
 
-		if (1) {
+		if (0) {
 
 			/*$post = $this->request->getPost();
 
@@ -64,21 +63,21 @@ class Admin extends BaseController
 				$data['news'] = $this->model->getNews();
 				$data['admin'] = true;
 				$data['title'] = 'Noticias ';
-				echo view('templates/header', $data);
+				echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
 				echo view('pages/admin', $data);
-				echo view('templates/footer.php', $data);
+				echo view('templates/footer.php', ['data' => $data, 'admin' => $this->admin]);
 				return;
 			} else {
 				throw new \CodeIgniter\Exceptions\ModelException('error en el insert');
 			}
 		} else {
-			echo view('templates/header', $data);
+			echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
 			echo view('pages/new', $data);
-			echo view('templates/footer.php', $data);
+			echo view('templates/footer.php', ['data' => $data, 'admin' => $this->admin]);
 		}
 	}
 
-	public function editNew($id = true)
+	/*public function editNew($id = true)
 	{
 		$data['admin'] = true;
 		if (is_numeric($newId)) {
@@ -97,5 +96,21 @@ class Admin extends BaseController
 		echo view('templates/header');
 		echo view('pages/admin/');
 		echo view('templates/footer.php');
+	}*/
+
+	public function saveNew()
+	{
+		var_dump($this->request->getMethod());
+		die;
+		var_dump($this->request);
+		die;
+
+		$this->request->getMethod() === 'post' && $this->validate([
+			'titulo' => 'required|min_length[3]|max_length[200]',
+			'resumen' => 'required',
+			'autor' => 'required',
+			'fecha' => 'required|date',
+			'categoria' => 'required|number'
+		]);
 	}
 }
