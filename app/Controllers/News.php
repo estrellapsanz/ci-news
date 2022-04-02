@@ -3,49 +3,43 @@
 namespace App\Controllers;
 
 use App\Models\NewsModel;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class News extends BaseController
 {
+
+	function __construct()
+	{
+
+		/* Loading user modal and session library */
+		$this->model = model(NewsModel::class);
+		//$this->session = \Config\Services::session();
+	}
+
 	public function index()
 	{
 		return view('welcome_message');
-
 	}
 
-	public function view($page='news'){
-		if (! is_file(APPPATH . 'Views/pages/' . $page . '.php')) {
-			// Whoops, we don't have a page for that!
-			throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
-		}
-
-		$data['admin']=false;
-		$data['title'] = ucfirst($page); // Capitalize the first letter
-
-		echo view('templates/header', $data);
-		echo view('pages/' . $page, $data);
-		echo view('templates/footer.php', $data);
-	}
-
-	public function hotNews($newId=false){
-		ini_set('display_errors', 1);
-		ini_set('display_startup_errors', 1);
-		error_reporting(E_ALL);
-
-		$data['admin']=false;
-		$data['title']='Noticias de actualidad';
-		$model = model(NewsModel::class);
-		$data['news'] = $model->getNews();
+	public function hotNews($newId = false)
+	{
+		$data['admin'] = false;
+		$data['title'] = 'Noticias de actualidad';
 
 
-		if (is_numeric($newId)){
-			$data['title']='Noticia';
-			$data['new'] = $model->getNews($newId);
-			echo view('templates/header', $data);
-			echo view('pages/news/'.$newId, $data);
-			//echo view('pages/news', $data); y no poner foreach en vista
-			echo view('templates/footer.php', $data);
-			return ;
-		}
+		if (is_numeric($newId)) {
+
+			$new = $this->model->getNews($newId);
+
+			if ($new !== null) {
+				$data['news'][0] = $new;
+				$data['title'] = $data['news'][0]['titulo'];
+			} else {
+				$data['news'][0] = null;
+				$data['title'] = 'Noticia no encontrada';
+			}
+		} else
+			$data['news'] = $this->model->getNews();
 
 
 		echo view('templates/header', $data);
