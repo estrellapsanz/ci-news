@@ -10,7 +10,6 @@ class Admin extends BaseController
 
 	function __construct()
 	{
-
 		$this->model = model(NewsModel::class);
 		$this->admin = true;
 	}
@@ -25,14 +24,14 @@ class Admin extends BaseController
 		echo view('templates/footer.php', $data);
 	}
 
-	public function new()
+	public function new($save = false)
 	{
 
 		$data['title'] = 'Nueva Noticia';
 		var_dump($this->request->getMethod());
 		var_dump($this->request->getVar('titulo'));
 		var_dump($_POST);
-		//die;
+		die;
 
 		/*if (1 || $this->request->getMethod() === 'post' && $this->validate([
 				'titulo' => 'required|min_length[3]|max_length[200]',
@@ -101,8 +100,10 @@ class Admin extends BaseController
 		echo view('templates/footer.php');
 	}*/
 
-	public function saveNew()
+	public function savenew()
 	{
+		var_dump(23);
+		die;
 		var_dump($this->request->getPost());
 		die;
 		var_dump($this->request);

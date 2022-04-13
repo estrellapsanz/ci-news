@@ -3,7 +3,7 @@
         <h1><?= $title ?></h1>
 
         <ul>
-            <form action="/admin/new">
+            <form action="<?= base_url('admin/new') ?>">
                 <button type="submit"> + Nueva noticia</button>
             </form>
 			<?php foreach ($news as $new) { ?>

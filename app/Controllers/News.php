@@ -23,6 +23,7 @@ class News extends BaseController
 
 	public function hotNews($newId = false)
 	{
+
 		$data['title'] = 'Noticias de actualidad';
 
 		if (is_numeric($newId)) {
