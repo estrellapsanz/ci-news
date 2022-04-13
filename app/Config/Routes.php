@@ -41,7 +41,7 @@ $routes->match(['get', 'post'], '/admin/edit/(:any)', 'Admin::edit/$1');
 
 $routes->resource('api/noticia', ['only' => ['index', 'show']]);
 $routes->resource('api/noticia', ['controller' => 'Noticia']);
-$routes->presenter('noticias');
+
 
 $routes->resource('api/categoria', ['only' => ['index', 'show']]);
 $routes->resource('api/categoria', ['controller' => 'Categoria']);
