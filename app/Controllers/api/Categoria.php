@@ -4,9 +4,9 @@ namespace App\Controllers\api;
 
 use CodeIgniter\RESTful\ResourceController;
 
-class Noticia extends ResourceController
+class Categoria extends ResourceController
 {
-	protected $modelName = 'App\Models\ApiModel';
+	protected $modelName = 'App\Models\CategoryModel';
 	protected $format = 'json';
 
 	public function index()

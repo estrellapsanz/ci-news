@@ -48,4 +48,12 @@ class NewsModel extends Model
 		return -1;
 
 	}
+
+	public function getApiNews($slug = false)
+	{
+		if (!$slug)
+			return $this->select('id, titulo, fecha_publicacion')->findAll();
+		else
+			return $this->select()->where(['id' => $slug])->findAll();
+	}
 }

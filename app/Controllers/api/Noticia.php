@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\api;
 
 use CodeIgniter\RESTful\ResourceController;
 
 class Noticia extends ResourceController
 {
-	protected $modelName = 'App\Models\ApiModel';
+	protected $modelName = 'App\Models\NewsModel';
 	protected $format = 'json';
 
 	public function index()
 	{
-		return $this->genericResponse($this->model->findAll(), NULL, 200);
+		return $this->genericResponse($this->model->getApiNews(), NULL, 200);
 	}
 
 	private function genericResponse($data, $msj, $code)
@@ -28,6 +28,6 @@ class Noticia extends ResourceController
 
 	public function show($id = NULL)
 	{
-		return $this->genericResponse($this->model->find($id), NULL, 200);
+		return $this->genericResponse($this->model->getApiNews($id), NULL, 200);
 	}
 }

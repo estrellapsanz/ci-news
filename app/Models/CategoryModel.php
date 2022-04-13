@@ -4,13 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class NewsModel extends Model
+class CategoryModel extends Model
 {
-	protected $table = 'news';
-	protected $allowedFields = ['id', 'titulo', 'id_categoria', 'resumen', 'autor',
-		'fecha_publicacion', 'imagen', 'resumen'];
+	protected $table = 'categoria';
+	protected $allowedFields = ['id', 'nombre'];
 
-	public function getNews($slug = false)
+	public function getCategories($slug = false)
 	{
 
 		if ($slug === false) {
@@ -20,7 +19,7 @@ class NewsModel extends Model
 		return $this->where(['id' => $slug])->first();
 	}
 
-	public function addNew($data)
+	public function addCategorie($data)
 	{
 
 		if ($data !== false) {
@@ -30,22 +29,25 @@ class NewsModel extends Model
 
 	}
 
-	public function editNew($data)
+	public function editCategorie($data)
 	{
 
 		if ($data !== false) {
 			return $this->update(
 				$data['id'],
 				[
-					'titulo' => $data['titulo'],
-					'autor' => $data['autor'],
-					'fecha_publicacion' => $data['fecha_publicacion'],
-					//'imagen' => $data['imagen'],
-					'resumen' => $data['resumen'],
-					'id_categoria' => $data['id_categoria']
+					'nombre' => $data['nombre']
 				]);
 		}
 		return -1;
 
+	}
+
+	public function getApiNews($slug = false)
+	{
+		if (!$slug)
+			return $this->select('id, titulo')->findAll();
+		else
+			return $this->select()->where(['id' => $slug])->findAll();
 	}
 }
