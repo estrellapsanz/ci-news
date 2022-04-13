@@ -5,7 +5,7 @@
         <?= session()->getFlashdata('error') ?>
         <?= service('validation')->listErrors() ?>
 
-        <form action='/admin/saveNew' method="post" enctype="multipart/form-data">
+        <form action='/admin/new' method="POST" enctype="multipart/form-data">
 
             <div>
                 <label for="titulo">Título</label>

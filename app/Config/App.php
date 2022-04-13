@@ -24,7 +24,7 @@ class App extends BaseConfig
      * @var string
      */
     //public $baseURL = 'http://localhost:8080/';
-    public $baseURL = 'http://localhost/codeigniternews/public/';
+    public $baseURL = 'http://localhost:8080/codeigniternews/public/';
 
     /**
      * --------------------------------------------------------------------------
@@ -37,17 +37,18 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $indexPage = 'index.php';
+	#public $indexPage = 'index.php';
+	public $indexPage = '';
 
-    /**
-     * --------------------------------------------------------------------------
-     * URI PROTOCOL
-     * --------------------------------------------------------------------------
-     *
-     * This item determines which getServer global should be used to retrieve the
-     * URI string.  The default setting of 'REQUEST_URI' works for most servers.
-     * If your links do not seem to work, try one of the other delicious flavors:
-     *
+	/**
+	 * --------------------------------------------------------------------------
+	 * URI PROTOCOL
+	 * --------------------------------------------------------------------------
+	 *
+	 * This item determines which getServer global should be used to retrieve the
+	 * URI string.  The default setting of 'REQUEST_URI' works for most servers.
+	 * If your links do not seem to work, try one of the other delicious flavors:
+	 *
      * 'REQUEST_URI'    Uses $_SERVER['REQUEST_URI']
      * 'QUERY_STRING'   Uses $_SERVER['QUERY_STRING']
      * 'PATH_INFO'      Uses $_SERVER['PATH_INFO']

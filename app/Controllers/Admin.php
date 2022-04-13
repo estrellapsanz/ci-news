@@ -29,7 +29,10 @@ class Admin extends BaseController
 	{
 
 		$data['title'] = 'Nueva Noticia';
-
+		var_dump($this->request->getMethod());
+		var_dump($this->request->getVar('titulo'));
+		var_dump($_POST);
+		//die;
 
 		/*if (1 || $this->request->getMethod() === 'post' && $this->validate([
 				'titulo' => 'required|min_length[3]|max_length[200]',
@@ -100,7 +103,7 @@ class Admin extends BaseController
 
 	public function saveNew()
 	{
-		var_dump($this->request->getMethod());
+		var_dump($this->request->getPost());
 		die;
 		var_dump($this->request);
 		die;
