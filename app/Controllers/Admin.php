@@ -24,97 +24,88 @@ class Admin extends BaseController
 		echo view('templates/footer.php', $data);
 	}
 
-	public function new($save = false)
+	public function new($param = false)
 	{
-
 		$data['title'] = 'Nueva Noticia';
-		var_dump($this->request->getMethod());
-		var_dump($this->request->getVar('titulo'));
-		var_dump($_POST);
-		die;
 
-		/*if (1 || $this->request->getMethod() === 'post' && $this->validate([
+
+		if ($param == 'save' && $this->request->getMethod() === 'post' && 1 /*$this->validate([
 				'titulo' => 'required|min_length[3]|max_length[200]',
 				'resumen' => 'required',
 				'autor' => 'required',
 				'fecha' => 'required|date',
 				'categoria' => 'required|number'
-			]))
-		*/
+			]) */
+		) {
 
-
-		if (0) {
-
-			/*$post = $this->request->getPost();
+			$post = $this->request->getPost();
+			$files = $this->request->getFiles();
 
 			$data['titulo'] = $post['titulo'];
 			$data['resumen'] = $post['resumen'];
 			$data['id_categoria'] = $post['categoria'];
 			$data['autor'] = $post['autor'];
 			$data['fecha_publicacion'] = $post['fecha'];
-			//$data['imagen']=>$post['imagen'];*/
+			//$data['imagen']=>$files['name']['imagen'];*/
 
-			$data['titulo'] = 'test test';
-			$data['autor'] = 'Estrella';
-			$data['resumen'] = 'resumen';
-			$data['id_categoria'] = 1;
-			$data['fecha_publicacion'] = '2021/03/03';
 			$ok = $this->model->addNew($data);
-			var_dump($ok);;
-			if ($ok != -1) {
-				$data['news'] = $this->model->getNews();
-				$data['admin'] = true;
-				$data['title'] = 'Noticias ';
-				echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
-				echo view('pages/admin', $data);
-				echo view('templates/footer.php', ['data' => $data, 'admin' => $this->admin]);
-				return;
-			} else {
-				throw new \CodeIgniter\Exceptions\ModelException('error en el insert');
-			}
+
+			if ($ok != -1)
+				return redirect()->to('/admin');
+			else
+				throw new \CodeIgniter\Exceptions\ModelException('error creando nueva noticia');
+
 		} else {
+
 			echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
 			echo view('pages/new', $data);
 			echo view('templates/footer.php', ['data' => $data, 'admin' => $this->admin]);
 		}
 	}
 
-	/*public function editNew($id = true)
+	public function edit($param = true)
 	{
-		$data['admin'] = true;
-		if (is_numeric($newId)) {
-			$data['title'] = 'Editar noticia: ' . $newId;
-			$model = model(NewsModel::class);
-			$data['new'] = $model->getNews($newId);
-			if (empty($data['news'])) {
-				throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the news item: ' . $slug);
+		$data['title'] = 'Editar Noticia';
+
+		if (is_numeric($param)) {
+
+			$data['new'] = $this->model->getNews($param);
+
+			if (empty($data['new'])) {
+				throw new \CodeIgniter\Exceptions\ModelException('error recuperando noticia');
 			}
-			echo view('templates/header', $data);
-			echo view('pages/news/new', $data);
-			echo view('templates/footer.php', $data);
-			return;
-		}
+			$data['admin'] = true;
 
-		echo view('templates/header');
-		echo view('pages/admin/');
-		echo view('templates/footer.php');
-	}*/
+			echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
+			echo view('pages/edit', $data);
+			echo view('templates/footer.php', ['data' => $data, 'admin' => $this->admin]);
 
-	public function savenew()
-	{
-		var_dump(23);
-		die;
-		var_dump($this->request->getPost());
-		die;
-		var_dump($this->request);
-		die;
+		} else if ($param == 'save') {
 
-		$this->request->getMethod() === 'post' && $this->validate([
-			'titulo' => 'required|min_length[3]|max_length[200]',
-			'resumen' => 'required',
-			'autor' => 'required',
-			'fecha' => 'required|date',
-			'categoria' => 'required|number'
-		]);
+			$post = $this->request->getPost();
+			$files = $this->request->getFiles();
+
+			$data['id'] = $post['id'];
+			$data['titulo'] = $post['titulo'];
+			$data['resumen'] = $post['resumen'];
+			$data['id_categoria'] = $post['categoria'];
+			$data['autor'] = $post['autor'];
+			$data['fecha_publicacion'] = $post['fecha'];
+			//$data['imagen']=>$files['name']['imagen'];*/
+
+			$updated = $this->model->editNew($data);
+
+			if ($updated !== -1) {
+				return redirect()->to('/admin');
+			} else
+
+				throw new \CodeIgniter\Exceptions\ModelException('error creando nueva noticia');
+
+
+		} else
+			throw new \CodeIgniter\Exceptions\PageNotFoundException('error recuperando noticia');
+
+
 	}
+
 }

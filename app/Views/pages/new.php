@@ -2,15 +2,16 @@
     <div class="further">
         <h1><?= $title ?></h1>
 
-		<?php /*= session()->getFlashdata('error') */ ?>
-		<?php /*= service('validation')->listErrors()*/ ?>
+		<?= session()->getFlashdata('error') ?>
+		<?= service('validation')->listErrors() ?>
 
 
-        <form action='<?= base_url('/admin/new/save') ?>' method="POST" enctype="multipart/form-data">
+        <form action='<?= base_url('/admin/new/save') ?>' method="post" enctype="multipart/form-data">
 
             <div>
                 <label for="titulo">Título</label>
-                <input type="text" name="titulo" placeholder="Título" for="titulo">
+                <input type="text" name="titulo" placeholder="Título" for="titulo"
+                >
             </div>
             <div>
                 <label for="categoria">Categoría</label>
