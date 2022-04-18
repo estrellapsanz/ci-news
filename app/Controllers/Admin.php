@@ -1,22 +1,36 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\CategoryModel;
 use App\Models\NewsModel;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+use Myth\Auth\Models\userModel;
+
 
 class Admin extends BaseController
 {
 
 	function __construct()
 	{
+
+		$this->session = service('session');
 		$this->model = model(NewsModel::class);
 		$this->admin = true;
+		helper('auth');
+		$this->userModel = model(UserModel::class);
+		$this->categoryModel = model(CategoryModel::class);
 	}
 
 
 	public function index()
 	{
+
+		if (!logged_in())
+			return redirect()->to('/login');
+
+		if (!in_groups('admins')) {
+			return redirect()->to('/');
+		}
+
 		$data['title'] = 'Administración de noticias';
 		$data['news'] = $this->model->getNews();
 		echo view('templates/header', ['data' => $data, 'admin' => $this->admin]);
@@ -26,17 +40,19 @@ class Admin extends BaseController
 
 	public function new($param = false)
 	{
+
+		if (!logged_in())
+			return redirect()->to('/login');
+
+		if (!in_groups('admins')) {
+			return redirect()->to('/');
+		}
+
+
 		$data['title'] = 'Nueva Noticia';
+		$data['categorias'] = $this->categoryModel->getCategories();
 
-
-		if ($param == 'save' && $this->request->getMethod() === 'post' && 1 /*$this->validate([
-				'titulo' => 'required|min_length[3]|max_length[200]',
-				'resumen' => 'required',
-				'autor' => 'required',
-				'fecha' => 'required|date',
-				'categoria' => 'required|number'
-			]) */
-		) {
+		if ($param == 'save' && $this->request->getMethod() === 'post') {
 
 			$post = $this->request->getPost();
 			$files = $this->request->getFiles();
@@ -46,7 +62,7 @@ class Admin extends BaseController
 			$data['id_categoria'] = $post['categoria'];
 			$data['autor'] = $post['autor'];
 			$data['fecha_publicacion'] = $post['fecha'];
-			//$data['imagen']=>$files['name']['imagen'];*/
+			$data['imagen'] = $files['imagen']->getName();
 
 			$ok = $this->model->addNew($data);
 
@@ -65,11 +81,21 @@ class Admin extends BaseController
 
 	public function edit($param = true)
 	{
+
+		if (!logged_in())
+			return redirect()->to('/login');
+
+		if (!in_groups('admins')) {
+			return redirect()->to('/');
+		}
+
 		$data['title'] = 'Editar Noticia';
+
 
 		if (is_numeric($param)) {
 
 			$data['new'] = $this->model->getNews($param);
+			$data['categorias'] = $this->categoryModel->getCategories();
 
 			if (empty($data['new'])) {
 				throw new \CodeIgniter\Exceptions\ModelException('error recuperando noticia');
@@ -100,7 +126,6 @@ class Admin extends BaseController
 			} else
 
 				throw new \CodeIgniter\Exceptions\ModelException('error creando nueva noticia');
-
 
 		} else
 			throw new \CodeIgniter\Exceptions\PageNotFoundException('error recuperando noticia');

@@ -3,40 +3,40 @@
         <h1><?= $title ?></h1>
 
         <form action='<?= base_url('/admin/edit/save') ?>' method="post" enctype="multipart/form-data">
-			<?php if (isset($new) && !empty($new['id'])) { ?>
+		    <?php if (isset($new) && !empty($new['id'])) { ?>
                 <input type="hidden" name="id" value="<?= $new['id'] ?>"
-			<?php } ?>
+		    <?php } ?>
             <div>
                 <label for="titulo">Título</label>
                 <input type="text" name="titulo" placeholder="Título" for="titulo"
-					<?php if (isset($new) && !empty($new['titulo'])) { ?>
+				    <?php if (isset($new) && !empty($new['titulo'])) { ?>
                         value="<?= $new['titulo'] ?>"
-					<?php } ?>>
+				    <?php } ?> required>
             </div>
             <div>
                 <label for="categoria">Categoría</label>
-                <input type="number" name="categoria" placeholder="Categoria" for="categoria"
-					<?php if (isset($new) && !empty($new['id_categoria'])) { ?>
-                        value="<?= $new['id_categoria'] ?>"
-					<?php } ?>>
+                <select name="categoria" for="categoria" required>
+				    <?php if (isset($categorias) && !empty($categorias[0])) {
+					    foreach ($categorias as $desc_categoria) { ?>
+                            <option value="<?= $desc_categoria['Id'] ?>" <?php if ($new['id_categoria'] == $desc_categoria['Id']) echo 'selected'; ?>><?= $desc_categoria['Nombre'] ?></option>
+						    <?php
+					    }
+				    } ?>
+                </select>
             </div>
             <div>
                 <label for="resumen">Resumen</label>
-                <textarea name="resumen" cols="100" rows="5" placeholder="Resumen">
-                     <?php if (isset($new) && !empty($new['resumen'])) { ?>
-	                     <?= trim($new['resumen']) ?>
-                     <?php } ?>
-                </textarea>
+                <textarea name="resumen" cols="100" rows="5" placeholder="Resumen"
+                          required><?php if (isset($new) && !empty($new['resumen'])) { ?><?= trim($new['resumen']) ?><?php } ?></textarea>
 
             </div>
             <div>
                 <label for="imagen">Imagen actual</label><br>
-
-				<?php if (isset($new) && !empty($new['imagen'])) { ?>
+			    <?php if (isset($new) && !empty($new['imagen'])) { ?>
                     <img src="<?= base_url() . '/images/' . $new['imagen'] ?>" alt="<?= $new['titulo'] ?>" width="200"
-                         height="150">
+                         height="150" required>
 
-				<?php } ?>
+			    <?php } ?>
 
             </div>
             <div>
@@ -47,16 +47,16 @@
             <div>
                 <label for="autor">Autor</label>
                 <input type="text" name="autor" placeholder="Autor" for="autor"
-					<?php if (isset($new) && !empty($new['autor'])) { ?>
+				    <?php if (isset($new) && !empty($new['autor'])) { ?>
                         value="<?= $new['autor'] ?>"
-					<?php } ?>>
+				    <?php } ?> required>
             </div>
             <div>
                 <label for="fecha">Fecha</label>
                 <input type="date" name="fecha" placeholder="Fecha" for="fecha"
-					<?php if (isset($new) && !empty($new['fecha_publicacion'])) { ?>
+				    <?php if (isset($new) && !empty($new['fecha_publicacion'])) { ?>
                         value="<?= $new['fecha_publicacion'] ?>"
-					<?php } ?>>
+				    <?php } ?> required>
             </div>
             <div>
                 <br>

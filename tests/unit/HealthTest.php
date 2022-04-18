@@ -17,23 +17,23 @@ final class HealthTest extends CIUnitTestCase
 
     public function testBaseUrlHasBeenSet()
     {
-        $validation = Services::validation();
+	    $validation = Services::validation();
 
-        $env = false;
+	    $env = false;
 
-        // Check the baseURL in .env
-        if (is_file(HOMEPATH . '.env')) {
-            $env = preg_grep('/^app\.baseURL = ./', file(HOMEPATH . '.env')) !== false;
-        }
+	    // Check the baseURL in ..env
+	    if (is_file(HOMEPATH . '..env')) {
+		    $env = preg_grep('/^app\.baseURL = ./', file(HOMEPATH . '..env')) !== false;
+	    }
 
-        if ($env) {
-            // BaseURL in .env is a valid URL?
-            // phpunit.xml.dist sets app.baseURL in $_SERVER
-            // So if you set app.baseURL in .env, it takes precedence
-            $config = new App();
-            $this->assertTrue(
-                $validation->check($config->baseURL, 'valid_url'),
-                'baseURL "' . $config->baseURL . '" in .env is not valid URL'
+	    if ($env) {
+		    // BaseURL in ..env is a valid URL?
+		    // phpunit.xml.dist sets app.baseURL in $_SERVER
+		    // So if you set app.baseURL in ..env, it takes precedence
+		    $config = new App();
+		    $this->assertTrue(
+			    $validation->check($config->baseURL, 'valid_url'),
+			    'baseURL "' . $config->baseURL . '" in ..env is not valid URL'
             );
         }
 
