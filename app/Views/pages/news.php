@@ -6,13 +6,18 @@
                 foreach ($news as $new) { ?>
                     <li>
                         <h3><?= esc($new['titulo']) ?></h3>
-                        <img src="<?= base_url() ?>/images/<?= $new['imagen'] ?>" alt="<?= $new['titulo'] ?>" width="400" height="300">
+                        <img src="<?= base_url() ?>/images/<?= $new['imagen'] ?>" alt="<?= $new['titulo'] ?>"
+                             width="400" height="300">
 
                     </li>
-                    <p><?= esc($new['resumen']) ?>
-                    <p><a href="news/<?= esc($new['id'], 'url') ?>">Ver más</a></p>
+                    <p><?= esc($new['resumen']) ?></p>
+
+	                <?php if (sizeof($news) > 1) { ?>
+                        <p><a href="news/<?= esc($new['id'], 'url') ?>">Ver más</a></p>
+	                <?php } ?>
                     <br>
-                    By <?= $new['autor'] . ' ,' . $new['fecha_publicacion'] ?>
+                    <p>
+                        By <?= $new['autor'] . ' ,' . $new['fecha_publicacion'] ?>
                     </p>
                 <?php }
             } else { ?>

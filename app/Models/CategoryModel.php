@@ -43,11 +43,5 @@ class CategoryModel extends Model
 
 	}
 
-	public function getApiNews($slug = false)
-	{
-		if (!$slug)
-			return $this->select('id, titulo')->findAll();
-		else
-			return $this->select()->where(['id' => $slug])->findAll();
-	}
+
 }

@@ -56,4 +56,26 @@ class NewsModel extends Model
 		else
 			return $this->select()->where(['id' => $slug])->findAll();
 	}
+
+	public function getApiNewsByCategoria($slug = false)
+	{
+
+		if (!$slug)
+			return $this->select('id, titulo')->findAll();
+		else {
+
+			$db = db_connect();
+			//$db->query('select id,titulo, fecha_publicacion from news where id_categoria= ?');
+			$sql = "select id,titulo, fecha_publicacion from news where id_categoria= ?";
+			$result = $db->query($sql, $slug);
+
+			foreach ($result->getResultArray() as $row) {
+				$returnArray[] = $row;
+			}
+
+			return $returnArray;
+
+
+		}
+	}
 }

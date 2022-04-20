@@ -6,12 +6,12 @@ use CodeIgniter\RESTful\ResourceController;
 
 class Categoria extends ResourceController
 {
-	protected $modelName = 'App\Models\CategoryModel';
+	protected $modelName = 'App\Models\NewsModel';
 	protected $format = 'json';
 
 	public function index()
 	{
-		return $this->genericResponse($this->model->findAll(), NULL, 200);
+		return $this->genericResponse($this->model->getApiNewsByCategoria(), NULL, 200);
 	}
 
 	private function genericResponse($data, $msj, $code)
@@ -28,6 +28,6 @@ class Categoria extends ResourceController
 
 	public function show($id = NULL)
 	{
-		return $this->genericResponse($this->model->find($id), NULL, 200);
+		return $this->genericResponse($this->model->getApiNewsByCategoria($id), NULL, 200);
 	}
 }
